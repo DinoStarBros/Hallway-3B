@@ -14,6 +14,27 @@ config/name="Hallway3B"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://global.gd"
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Art/": "red",
+"res://Audio/": "orange",
+"res://Screens/": "green",
+"res://addons/": "gray",
+"res://entities/": "blue",
+"res://saveSystem/": "yellow",
+"res://timer/": "teal"
+}
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

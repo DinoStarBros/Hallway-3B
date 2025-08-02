@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bah342o5qcsw4"]
+
+[ext_resource type="Script" uid="uid://cw5hhuftql5fg" path="res://entities/dont_look/dont_look.gd" id="1_lg1ee"]
+
+[node name="dont_look" type="CharacterBody2D"]
+script = ExtResource("1_lg1ee")

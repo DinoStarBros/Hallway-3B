@@ -1,6 +1,798 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkghcuw1xu7wh"]
+[gd_scene load_steps=35 format=3 uid="uid://bkghcuw1xu7wh"]
 
 [ext_resource type="Script" uid="uid://vynm4wv1ssll" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="Script" uid="uid://m32k5mq5sexe" path="res://entities/player/camera.gd" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://pd3d2b1x25qx" path="res://entities/player/gui.gd" id="5_fkugw"]
+[ext_resource type="PackedScene" uid="uid://bj5jbn7aere7t" path="res://timer/timer.tscn" id="6_8fjmc"]
+[ext_resource type="Script" uid="uid://rkcs2jtotkmj" path="res://stateMachines/player_states/player_stateMachine.gd" id="6_qiwj3"]
+[ext_resource type="Texture2D" uid="uid://cjkasliviwdhm" path="res://Art/Placeholder/Melon Sprites.png" id="7_26q78"]
+[ext_resource type="Script" uid="uid://betkg2ge27k2g" path="res://stateMachines/player_states/walkPlr.gd" id="7_qiwj3"]
+[ext_resource type="Script" uid="uid://b1gnmqte8kxvk" path="res://stateMachines/player_states/fallPlr.gd" id="8_26q78"]
+[ext_resource type="Script" uid="uid://blcoaca308u6r" path="res://stateMachines/player_states/jumpPlr.gd" id="9_bectd"]
+[ext_resource type="Script" uid="uid://btacrlh24ujbi" path="res://stateMachines/player_states/runPlr.gd" id="10_wvtmh"]
+[ext_resource type="Script" uid="uid://bvw7swa40l4ys" path="res://stateMachines/player_states/slidePlr.gd" id="11_7thud"]
+[ext_resource type="Script" uid="uid://btn365321qkt5" path="res://stateMachines/player_states/jumprunPlr.gd" id="12_a1qjk"]
+[ext_resource type="Script" uid="uid://dh4ke65sdrgtu" path="res://stateMachines/player_states/crouchPlr.gd" id="13_j3ovn"]
+[ext_resource type="Script" uid="uid://cb7cbxb1wbokv" path="res://stateMachines/player_states/fallrunPlr.gd" id="14_afbqv"]
+[ext_resource type="Script" uid="uid://lwvt6ob2mlo4" path="res://stateMachines/player_states/wallClimbPlr.gd" id="15_gx6sm"]
+[ext_resource type="Script" uid="uid://bpo7gxivu7el7" path="res://stateMachines/player_states/wallJumpPlr.gd" id="16_yqrof"]
+[ext_resource type="Script" uid="uid://cqy2w2n3pdeva" path="res://stateMachines/player_states/divePlr.gd" id="17_3wlsy"]
+[ext_resource type="PackedScene" uid="uid://uq8vb431vb2y" path="res://flashlight/flashlight.tscn" id="18_b2kln"]
+[ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="19_we0b7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_symyc"]
+size = Vector2(56, 30)
+
+[sub_resource type="Animation" id="Animation_bectd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MelonSprites:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0872665]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MelonSprites:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MelonSprites:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -38)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("collisionBox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("collisionBox:shape:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_j3ovn"]
+resource_name = "crouch"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("collisionBox:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, 30)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("collisionBox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
+
+[sub_resource type="Animation" id="Animation_a1qjk"]
+resource_name = "fall"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wvtmh"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7thud"]
+resource_name = "jump"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_26q78"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 11, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qiwj3"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 11, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_afbqv"]
+resource_name = "crouchwalk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MelonSprites:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("collisionBox:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, 30)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("collisionBox:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
+
+[sub_resource type="Animation" id="Animation_gx6sm"]
+resource_name = "jumprun"
+length = 0.3
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}, {
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MelonSprites:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.267943, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MelonSprites:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.34151, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.19, 0.24)]
+}
+
+[sub_resource type="Animation" id="Animation_yqrof"]
+resource_name = "fallrun"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3wlsy"]
+resource_name = "wallclimb"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 11, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_b2kln"]
+resource_name = "slide"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MelonSprites:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("collisionBox:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, 30)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("collisionBox:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
+
+[sub_resource type="Animation" id="Animation_we0b7"]
+resource_name = "dive"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MelonSprites:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("collisionBox:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, 30)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("collisionBox:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_26q78"]
+_data = {
+&"RESET": SubResource("Animation_bectd"),
+&"crouch": SubResource("Animation_j3ovn"),
+&"crouchwalk": SubResource("Animation_afbqv"),
+&"dive": SubResource("Animation_we0b7"),
+&"fall": SubResource("Animation_a1qjk"),
+&"fallrun": SubResource("Animation_yqrof"),
+&"idle": SubResource("Animation_wvtmh"),
+&"jump": SubResource("Animation_7thud"),
+&"jumprun": SubResource("Animation_gx6sm"),
+&"run": SubResource("Animation_26q78"),
+&"slide": SubResource("Animation_b2kln"),
+&"walk": SubResource("Animation_qiwj3"),
+&"wallclimb": SubResource("Animation_3wlsy")
+}
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_symyc")
+
+[node name="collisionBox" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -15.5)
+shape = SubResource("RectangleShape2D_symyc")
+
+[node name="MelonSprites" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -38)
+rotation = 0.0872665
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_26q78")
+hframes = 16
+frame = 1
+
+[node name="animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_26q78")
+}
+
+[node name="camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(0.7, 0.7)
+limit_smoothed = true
+script = ExtResource("4_bls4j")
+
+[node name="gui" type="CanvasLayer" parent="."]
+script = ExtResource("5_fkugw")
+
+[node name="timer" parent="gui" instance=ExtResource("6_8fjmc")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="stateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_qiwj3")
+initial_state = "walk"
+
+[node name="walk" type="Node" parent="stateMachine"]
+script = ExtResource("7_qiwj3")
+
+[node name="fall" type="Node" parent="stateMachine"]
+script = ExtResource("8_26q78")
+
+[node name="jump" type="Node" parent="stateMachine"]
+script = ExtResource("9_bectd")
+
+[node name="run" type="Node" parent="stateMachine"]
+script = ExtResource("10_wvtmh")
+
+[node name="crouch" type="Node" parent="stateMachine"]
+script = ExtResource("13_j3ovn")
+
+[node name="slide" type="Node" parent="stateMachine"]
+script = ExtResource("11_7thud")
+
+[node name="jumprun" type="Node" parent="stateMachine"]
+script = ExtResource("12_a1qjk")
+
+[node name="fallrun" type="Node" parent="stateMachine"]
+script = ExtResource("14_afbqv")
+
+[node name="wallclimb" type="Node" parent="stateMachine"]
+script = ExtResource("15_gx6sm")
+
+[node name="wallJump" type="Node" parent="stateMachine"]
+script = ExtResource("16_yqrof")
+
+[node name="wJTimer" type="Timer" parent="stateMachine/wallJump"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="dive" type="Node" parent="stateMachine"]
+script = ExtResource("17_3wlsy")
+
+[node name="sm_text" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="crouch_celingl" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-27, -30)
+target_position = Vector2(0, -20)
+
+[node name="crouch_celingc" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -30)
+target_position = Vector2(0, -20)
+
+[node name="crouch_celingr" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(27, -30)
+target_position = Vector2(0, -20)
+
+[node name="ceiling_shifts" type="Node2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="ceiling_shift_l" type="RayCast2D" parent="ceiling_shifts"]
+unique_name_in_owner = true
+position = Vector2(-27, -71)
+target_position = Vector2(0, -10)
+
+[node name="ceiling_shift_c" type="RayCast2D" parent="ceiling_shifts"]
+unique_name_in_owner = true
+position = Vector2(0, -71)
+target_position = Vector2(0, -10)
+
+[node name="ceiling_shift_r" type="RayCast2D" parent="ceiling_shifts"]
+unique_name_in_owner = true
+position = Vector2(27, -71)
+target_position = Vector2(0, -10)
+
+[node name="flashlight" parent="." instance=ExtResource("18_b2kln")]
+position = Vector2(0, -30)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -30)
+energy = 1.2
+texture = ExtResource("19_we0b7")
+texture_scale = 5.0
+
+[connection signal="timeout" from="stateMachine/wallJump/wJTimer" to="stateMachine/wallJump" method="_on_w_j_timer_timeout"]

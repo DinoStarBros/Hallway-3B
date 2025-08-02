@@ -10,8 +10,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if not get_tree().paused and g.game_state == g.game_states.Combat:
-		time += delta
+	time += delta
 	
 	seconds = fmod(time, 60)
 	minutes = fmod(time, 3600) / 60

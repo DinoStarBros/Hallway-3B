@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctdfurkpk3nf3"]
+
+[ext_resource type="Script" uid="uid://blybus453bgea" path="res://entities/blind/blind.gd" id="1_kop71"]
+
+[node name="blind" type="CharacterBody2D"]
+script = ExtResource("1_kop71")

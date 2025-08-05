@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj5jbn7aere7t"]
+[gd_scene load_steps=4 format=3 uid="uid://bj5jbn7aere7t"]
 
 [ext_resource type="Script" uid="uid://bkxli8ikwj2xb" path="res://timer/timer.gd" id="1_qmwag"]
+[ext_resource type="FontFile" uid="uid://vjmr11ib3k4m" path="res://Art/Kenney/Fonts/Kenney Mini Square.ttf" id="2_ucwqk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qmwag"]
 font_size = 25
@@ -22,17 +23,20 @@ offset_bottom = 39.0
 [node name="Min" type="Label" parent="stuff"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ucwqk")
 text = "00:"
 label_settings = SubResource("LabelSettings_qmwag")
 
 [node name="Sec" type="Label" parent="stuff"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ucwqk")
 text = "00:"
 label_settings = SubResource("LabelSettings_qmwag")
 
 [node name="MSec" type="Label" parent="stuff"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ucwqk")
 text = "00:"
 label_settings = SubResource("LabelSettings_qmwag")

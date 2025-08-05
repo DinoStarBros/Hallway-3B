@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3nax03th5nvk"
+path="res://.godot/imported/bimbadim.mp3-d16a564a16a77d8f0cf1633fd0990a6e.mp3str"
+
+[deps]
+
+source_file="res://Audio/hallway3b music/bimbadim.mp3"
+dest_files=["res://.godot/imported/bimbadim.mp3-d16a564a16a77d8f0cf1633fd0990a6e.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

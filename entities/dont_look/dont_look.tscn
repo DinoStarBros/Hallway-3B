@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bah342o5qcsw4"]
+[gd_scene load_steps=2 format=3 uid="uid://fbp8kw8xj05y"]
 
-[ext_resource type="Script" uid="uid://cw5hhuftql5fg" path="res://entities/dont_look/dont_look.gd" id="1_lg1ee"]
+[ext_resource type="Script" uid="uid://bbmrkmu5867hj" path="res://entities/dont_look/dont_look.gd" id="1_knyls"]
 
-[node name="dont_look" type="CharacterBody2D"]
-script = ExtResource("1_lg1ee")
+[node name="look" type="CharacterBody2D"]
+script = ExtResource("1_knyls")

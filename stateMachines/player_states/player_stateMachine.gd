@@ -12,7 +12,7 @@ func _ready()-> void:
 	current_state.enter()
 
 func _process(_delta:float)-> void:
-	#%sm_text.text = str(current_state.name)
+	%sm_text.text = str(current_state.name)
 	pass
 
 func change_state(state: String)-> void:

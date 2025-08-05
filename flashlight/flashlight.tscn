@@ -1,25 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://uq8vb431vb2y"]
+[gd_scene load_steps=6 format=3 uid="uid://uq8vb431vb2y"]
 
 [ext_resource type="Script" uid="uid://pvepp6mo7quo" path="res://flashlight/flashlight.gd" id="1_qrrg0"]
 [ext_resource type="Texture2D" uid="uid://qja8eput01ij" path="res://Art/Stuff/traps.png" id="2_70f24"]
-[ext_resource type="Texture2D" uid="uid://mhcpscqm1uew" path="res://Art/hallway3b/flashlight_light.png" id="3_37pfa"]
+[ext_resource type="Texture2D" uid="uid://cyr2m6q5pv84" path="res://Art/RGS_Dev/tileset_brown.png" id="2_ax1w2"]
+[ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="3_37pfa"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ax1w2"]
+polygon = PackedVector2Array(6.15398e-05, 3, 5.00002, 14, 3.99995, 35, 29.9999, 37.0001, 29.0002, -35.9999, -32.9998, -31.0001, -31, 31.9999, -3.00005, 33, -4.99998, 14)
 
 [node name="flashlight" type="Node2D"]
+visible = false
 script = ExtResource("1_qrrg0")
 
+[node name="TilesetBrown" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(527.5, -225)
+scale = Vector2(5.88672, 21.625)
+texture = ExtResource("2_ax1w2")
+
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(40, 0)
+position = Vector2(58, 0)
 rotation = -1.5708
 texture = ExtResource("2_70f24")
 region_enabled = true
 region_rect = Rect2(32, 32, 32, 32)
 
-[node name="PointLight2D" type="PointLight2D" parent="sprite"]
-position = Vector2(-3.05176e-05, 577)
+[node name="line_of_sight_light" type="PointLight2D" parent="sprite"]
+position = Vector2(0, 8)
 rotation = 1.5708
-scale = Vector2(3, 3)
-blend_mode = 2
+shadow_enabled = true
+shadow_item_cull_mask = 3
 texture = ExtResource("3_37pfa")
-texture_scale = 2.0
+texture_scale = 7.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="sprite"]
+position = Vector2(0, -20)
+occluder = SubResource("OccluderPolygon2D_ax1w2")
+occluder_light_mask = 2
 
 [node name="light_area" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+collision_layer = 2
+collision_mask = 2
+
+[node name="lightbox" type="CollisionPolygon2D" parent="light_area"]
+position = Vector2(22, 0)
+polygon = PackedVector2Array(950, -530, 950, 550, 45, -1)

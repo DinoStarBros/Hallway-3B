@@ -6,6 +6,8 @@ var jump_buffer_time: float = 0
 func on_enter()-> void:
 	p.anim.play("fall")
 	jump_pressed = false
+	%run.pitch_scale = randf_range(1.9,2.1)
+	%run.play()
 
 func process(delta: float)-> void:
 	if p.is_on_floor():
@@ -23,7 +25,7 @@ func process(delta: float)-> void:
 		p.sm.change_state("slide")
 
 func on_exit()-> void:
-	pass
+	%run.stop()
 
 func jump_buffer_handling(delta: float)-> void:
 	if Input.is_action_just_pressed("Jump"):

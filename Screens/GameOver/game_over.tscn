@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://4tt5gvjr6n3"]
+
+[ext_resource type="Script" uid="uid://dp8rnic53r56y" path="res://Screens/GameOver/game_over.gd" id="1_hcatr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hcatr"]
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_hcatr")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 266.0
+offset_top = 306.0
+offset_right = 424.0
+offset_bottom = 326.0
+scale = Vector2(4.74995, 4.86045)
+text = "PRESS ESC TO RETRY"
+label_settings = SubResource("LabelSettings_hcatr")

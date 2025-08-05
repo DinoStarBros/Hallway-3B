@@ -9,7 +9,7 @@ func on_enter()-> void:
 		p.wall_direction = -1
 	
 
-func process(delta: float)-> void:
+func process(_delta: float)-> void:
 	p.sprite.flip_h = p.wall_direction == 1
 	
 	p.anim.play("wallclimb")
@@ -34,4 +34,5 @@ func process(delta: float)-> void:
 		p.sm.change_state("wallJump")
 
 func on_exit()-> void:
+	%dustParticle.emitting = false
 	p.allow_sprite_flip = true

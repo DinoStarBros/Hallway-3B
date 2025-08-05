@@ -5,8 +5,10 @@ func on_enter()-> void:
 	p.velocity.x = -p.wall_direction * 400
 	p.allow_sprite_flip = false
 	%wJTimer.start(0.15)
+	%jump.play()
+	%jumpDust.emitting = true
 
-func process(delta: float)-> void:
+func process(_delta: float)-> void:
 	p.sprite.flip_h = p.wall_direction == 1
 	
 	if p.velocity.y >= 0:

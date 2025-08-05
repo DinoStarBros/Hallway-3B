@@ -1,12 +1,13 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkghcuw1xu7wh"]
+[gd_scene load_steps=51 format=3 uid="uid://bkghcuw1xu7wh"]
 
 [ext_resource type="Script" uid="uid://vynm4wv1ssll" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="Texture2D" uid="uid://bnfyu2xmfiajc" path="res://Art/hallway3b/rabba-Sheet.png" id="3_t1t22"]
 [ext_resource type="Script" uid="uid://m32k5mq5sexe" path="res://entities/player/camera.gd" id="4_bls4j"]
 [ext_resource type="Script" uid="uid://pd3d2b1x25qx" path="res://entities/player/gui.gd" id="5_fkugw"]
 [ext_resource type="PackedScene" uid="uid://bj5jbn7aere7t" path="res://timer/timer.tscn" id="6_8fjmc"]
 [ext_resource type="Script" uid="uid://rkcs2jtotkmj" path="res://stateMachines/player_states/player_stateMachine.gd" id="6_qiwj3"]
-[ext_resource type="Texture2D" uid="uid://cjkasliviwdhm" path="res://Art/Placeholder/Melon Sprites.png" id="7_26q78"]
 [ext_resource type="Script" uid="uid://betkg2ge27k2g" path="res://stateMachines/player_states/walkPlr.gd" id="7_qiwj3"]
+[ext_resource type="PackedScene" uid="uid://do3oy3lqr320g" path="res://settingsMenu/settings_menu.tscn" id="7_qpopc"]
 [ext_resource type="Script" uid="uid://b1gnmqte8kxvk" path="res://stateMachines/player_states/fallPlr.gd" id="8_26q78"]
 [ext_resource type="Script" uid="uid://blcoaca308u6r" path="res://stateMachines/player_states/jumpPlr.gd" id="9_bectd"]
 [ext_resource type="Script" uid="uid://btacrlh24ujbi" path="res://stateMachines/player_states/runPlr.gd" id="10_wvtmh"]
@@ -18,7 +19,14 @@
 [ext_resource type="Script" uid="uid://bpo7gxivu7el7" path="res://stateMachines/player_states/wallJumpPlr.gd" id="16_yqrof"]
 [ext_resource type="Script" uid="uid://cqy2w2n3pdeva" path="res://stateMachines/player_states/divePlr.gd" id="17_3wlsy"]
 [ext_resource type="PackedScene" uid="uid://uq8vb431vb2y" path="res://flashlight/flashlight.tscn" id="18_b2kln"]
+[ext_resource type="AudioStream" uid="uid://cppxtyh63shtf" path="res://Audio/tresure/walkStep.wav" id="19_mtric"]
 [ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="19_we0b7"]
+[ext_resource type="AudioStream" uid="uid://cw0s6bkxlwn2b" path="res://Audio/splashtownSFX/Jump.wav" id="20_mtric"]
+[ext_resource type="AudioStream" uid="uid://nj64nd85rtql" path="res://Audio/splashtownSFX/Airdash.wav" id="21_eyb6c"]
+[ext_resource type="AudioStream" uid="uid://c7ap66p2gfont" path="res://Audio/jetslash sfx/SFX/JetFlyLoop.wav" id="22_221hk"]
+[ext_resource type="PackedScene" uid="uid://cg1j2ioabubjc" path="res://juices/trail/trail_fx.tscn" id="25_50fht"]
+[ext_resource type="Script" uid="uid://c41gwdwudo08n" path="res://entities/player/speed_lines.gd" id="25_wuv6x"]
+[ext_resource type="PackedScene" uid="uid://2m2qt563w7ii" path="res://juices/spd_line/speed_line.tscn" id="26_wuv6x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_symyc"]
 size = Vector2(56, 30)
@@ -28,74 +36,98 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath("collisionBox:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"update": 0,
+"values": [Vector2(0, -15.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MelonSprites:rotation")
+tracks/1/path = NodePath("collisionBox:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0872665]
+"values": [Vector2(56, 30)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MelonSprites:scale")
+tracks/2/path = NodePath("sfx/walk:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.2, 0.2)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MelonSprites:position")
+tracks/3/path = NodePath("sfx/wallclimb:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -38)]
+"update": 1,
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("collisionBox:position")
+tracks/4/path = NodePath("sprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -15.5)]
+"update": 1,
+"values": [12]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("collisionBox:shape:size")
+tracks/5/path = NodePath("sprite:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(56, 30)]
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("dustParticle:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
 }
 
 [sub_resource type="Animation" id="Animation_j3ovn"]
@@ -106,87 +138,226 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath("collisionBox:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
+"update": 0,
+"values": [Vector2(56, 30)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/path = NodePath("collisionBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.2, 0.1)]
+"values": [Vector2(0, -15)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/path = NodePath("sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -19)]
+"update": 1,
+"values": [22]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("collisionBox:shape:size")
+tracks/3/path = NodePath("sprite:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [Vector2(10, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_afbqv"]
+resource_name = "crouchwalk"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collisionBox:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [Vector2(56, 30)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("collisionBox:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("collisionBox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sfx/walk:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [22]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [0.0872665, -0.0872665]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_we0b7"]
+resource_name = "dive"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collisionBox:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, 30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("collisionBox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_a1qjk"]
 resource_name = "fall"
 length = 0.2
 step = 0.1
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [11]
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_yqrof"]
+resource_name = "fallrun"
+length = 0.2
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -200,196 +371,78 @@ resource_name = "idle"
 length = 0.8
 loop_mode = 1
 step = 0.1
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"initialize_properties"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_7thud"]
 resource_name = "jump"
 length = 0.2
-step = 0.1
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath("sfx/jump:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [9]
-}
-
-[sub_resource type="Animation" id="Animation_26q78"]
-resource_name = "run"
-length = 0.4
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 8, 11, 10]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"initialize_properties"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_qiwj3"]
-resource_name = "walk"
-length = 0.8
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 8, 11, 10]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"initialize_properties"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_afbqv"]
-resource_name = "crouchwalk"
-length = 0.4
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/path = NodePath("sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.2, 0.1)]
+"times": PackedFloat32Array(0, 0.025),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/path = NodePath("jumpDust:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -19)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MelonSprites:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.0872665, 0.0872665]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("collisionBox:shape:size")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(56, 30)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("collisionBox:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -15)]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_gx6sm"]
 resource_name = "jumprun"
 length = 0.3
-step = 0.1
+step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -410,89 +463,130 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MelonSprites:rotation")
+tracks/1/path = NodePath("sfx/jump:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.267943, 1),
-"update": 0,
-"values": [0.0, 6.28319]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MelonSprites:scale")
+tracks/2/path = NodePath("sfx/jumprun:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(0.34151, 1),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(0.19, 0.24)]
-}
-
-[sub_resource type="Animation" id="Animation_yqrof"]
-resource_name = "fallrun"
-length = 0.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [11]
+"values": [true]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("jumpDust:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"initialize_properties"
-}]
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_3wlsy"]
-resource_name = "wallclimb"
-length = 0.4
+[sub_resource type="Animation" id="Animation_26q78"]
+resource_name = "run"
+length = 0.3
 loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
+step = 0.05
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 8, 11, 10]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"initialize_properties"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sfx/walk:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dustParticle:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sfx/run:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_b2kln"]
@@ -503,152 +597,174 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath("collisionBox:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
+"update": 0,
+"values": [Vector2(56, 30)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/path = NodePath("collisionBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.2, 0.1)]
+"values": [Vector2(0, -15)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/path = NodePath("sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -19)]
+"update": 1,
+"values": [23]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MelonSprites:rotation")
+tracks/3/path = NodePath("dustParticle:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.0872665, 0.0872665]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("collisionBox:shape:size")
+tracks/4/path = NodePath("sprite:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(56, 30)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("collisionBox:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -15)]
+"values": [Vector2(-10, -32)]
 }
 
-[sub_resource type="Animation" id="Animation_we0b7"]
-resource_name = "dive"
-length = 0.2
+[sub_resource type="Animation" id="Animation_qiwj3"]
+resource_name = "walk"
+length = 0.8
 loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
+step = 0.05
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MelonSprites:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MelonSprites:scale")
+tracks/1/path = NodePath("sfx/walk:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.2, 0.1)]
+"times": PackedFloat32Array(0.2, 0.25, 0.6, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MelonSprites:position")
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dustParticle:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_3wlsy"]
+resource_name = "wallclimb"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initialize_properties"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sfx/wallclimb:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dustParticle:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -19)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MelonSprites:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.0872665, 0.0872665]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("collisionBox:shape:size")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(56, 30)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("collisionBox:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -15)]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_26q78"]
@@ -668,7 +784,75 @@ _data = {
 &"wallclimb": SubResource("Animation_3wlsy")
 }
 
+[sub_resource type="Gradient" id="Gradient_t1t22"]
+colors = PackedColorArray(0.473976, 0.473976, 0.473976, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_50fht"]
+gradient = SubResource("Gradient_t1t22")
+
+[sub_resource type="Curve" id="Curve_t1t22"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.660819, 0.550562), -1.49438, -1.49438, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), -40.3485, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_50fht"]
+curve = SubResource("Curve_t1t22")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t1t22"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 1)
+angular_velocity_min = -372.06
+angular_velocity_max = 234.26
+gravity = Vector3(0, -25, 0)
+linear_accel_min = -44.02
+linear_accel_max = 56.46
+scale_min = 3.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_50fht")
+color_ramp = SubResource("GradientTexture1D_50fht")
+
+[sub_resource type="Animation" id="Animation_wq0jh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.169, 0.169, 0.169, 0.304)]
+}
+
+[sub_resource type="Animation" id="Animation_qpopc"]
+resource_name = "blindloop"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.169, 0.169, 0.169, 0), Color(0.169, 0.169, 0.169, 0.304)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wq0jh"]
+_data = {
+&"RESET": SubResource("Animation_wq0jh"),
+&"blindloop": SubResource("Animation_qpopc")
+}
+
 [node name="player" type="CharacterBody2D"]
+collision_layer = 21
+collision_mask = 21
 script = ExtResource("1_symyc")
 
 [node name="collisionBox" type="CollisionShape2D" parent="."]
@@ -676,14 +860,18 @@ unique_name_in_owner = true
 position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_symyc")
 
-[node name="MelonSprites" type="Sprite2D" parent="."]
+[node name="trail_fx" parent="." instance=ExtResource("25_50fht")]
+position = Vector2(0, -32)
+
+[node name="sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -38)
-rotation = 0.0872665
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("7_26q78")
-hframes = 16
-frame = 1
+z_index = 1
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("3_t1t22")
+hframes = 5
+vframes = 5
+frame = 12
 
 [node name="animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -691,20 +879,68 @@ libraries = {
 &"": SubResource("AnimationLibrary_26q78")
 }
 
-[node name="camera" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
 zoom = Vector2(0.7, 0.7)
 limit_smoothed = true
 script = ExtResource("4_bls4j")
+target = NodePath("..")
 
 [node name="gui" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 3
 script = ExtResource("5_fkugw")
 
 [node name="timer" parent="gui" instance=ExtResource("6_8fjmc")]
+unique_name_in_owner = true
+process_mode = 1
+z_index = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
+
+[node name="paused" type="Control" parent="gui"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="settingsMenu" parent="gui/paused" instance=ExtResource("7_qpopc")]
+unique_name_in_owner = true
+offset_left = 41.0
+offset_top = -298.0
+offset_right = 41.0
+offset_bottom = -298.0
+
+[node name="buttons2" type="HBoxContainer" parent="gui/paused/settingsMenu"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 533.0
+offset_right = 208.0
+offset_bottom = 573.0
+scale = Vector2(1.5, 1.5)
+
+[node name="resume" type="Button" parent="gui/paused/settingsMenu/buttons2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="quit" type="Button" parent="gui/paused/settingsMenu/buttons2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="sure" type="Button" parent="gui/paused/settingsMenu/buttons2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sure"
 
 [node name="stateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -748,8 +984,23 @@ one_shot = true
 [node name="dive" type="Node" parent="stateMachine"]
 script = ExtResource("17_3wlsy")
 
+[node name="Lights" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Player_Light" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -30)
+shadow_enabled = true
+texture = ExtResource("19_we0b7")
+texture_scale = 4.0
+height = 101.0
+
+[node name="flashlight" parent="Lights" instance=ExtResource("18_b2kln")]
+z_index = 2
+position = Vector2(0, -32)
+
 [node name="sm_text" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -786,13 +1037,137 @@ unique_name_in_owner = true
 position = Vector2(27, -71)
 target_position = Vector2(0, -10)
 
-[node name="flashlight" parent="." instance=ExtResource("18_b2kln")]
-position = Vector2(0, -30)
+[node name="sfx" type="Node2D" parent="."]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, -30)
-energy = 1.2
-texture = ExtResource("19_we0b7")
-texture_scale = 5.0
+[node name="walk" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("19_mtric")
+volume_db = -5.0
+pitch_scale = 0.8
+bus = &"SFX"
 
+[node name="wallclimb" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("19_mtric")
+volume_db = -10.0
+pitch_scale = 1.5
+bus = &"SFX"
+
+[node name="jump" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("20_mtric")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="jumprun" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("21_eyb6c")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="dive" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("22_221hk")
+volume_db = 3.0
+bus = &"SFX"
+
+[node name="slide" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("22_221hk")
+volume_db = -10.0
+pitch_scale = 4.0
+bus = &"SFX"
+
+[node name="run" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("22_221hk")
+volume_db = -10.0
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="dustParticle" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_t1t22")
+
+[node name="jumpDust" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_t1t22")
+
+[node name="speed_lines" type="CanvasLayer" parent="."]
+script = ExtResource("25_wuv6x")
+max_frame = 10
+
+[node name="speed_lines_parent" type="Node2D" parent="speed_lines"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(640, 360)
+
+[node name="speed_line" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(734, 188)
+
+[node name="speed_line2" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(-600, -324)
+
+[node name="speed_line3" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(-600, -53)
+
+[node name="speed_line4" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(-655, 131)
+
+[node name="speed_line5" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(-457, 337)
+
+[node name="speed_line6" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(-190, 427)
+
+[node name="speed_line7" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(155, 386)
+
+[node name="speed_line8" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(526, 297)
+
+[node name="speed_line9" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(646, 30)
+
+[node name="speed_line10" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(668, -235)
+
+[node name="speed_line11" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(396, -329)
+
+[node name="speed_line12" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(132, -343)
+
+[node name="speed_line13" parent="speed_lines/speed_lines_parent" instance=ExtResource("26_wuv6x")]
+position = Vector2(-260, -359)
+
+[node name="blind" type="Polygon2D" parent="speed_lines"]
+unique_name_in_owner = true
+visible = false
+color = Color(0.169, 0.169, 0.169, 0.304)
+polygon = PackedVector2Array(-195, -91, -120, 861, 1534, 803, 1404, -137)
+
+[node name="blindloop" type="AnimationPlayer" parent="speed_lines/blind"]
+libraries = {
+&"": SubResource("AnimationLibrary_wq0jh")
+}
+autoplay = "blindloop"
+
+[node name="antiBlindTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="pressed" from="gui/paused/settingsMenu/buttons2/resume" to="gui" method="_on_resume_pressed"]
+[connection signal="pressed" from="gui/paused/settingsMenu/buttons2/quit" to="gui" method="_on_quit_pressed"]
+[connection signal="pressed" from="gui/paused/settingsMenu/buttons2/sure" to="gui" method="_on_sure_pressed"]
 [connection signal="timeout" from="stateMachine/wallJump/wJTimer" to="stateMachine/wallJump" method="_on_w_j_timer_timeout"]
+[connection signal="timeout" from="antiBlindTimer" to="." method="_on_anti_blind_timer_timeout"]

@@ -1,6 +1,232 @@
-[gd_scene load_steps=2 format=3 uid="uid://fbp8kw8xj05y"]
+[gd_scene load_steps=18 format=3 uid="uid://bah342o5qcsw4"]
 
-[ext_resource type="Script" uid="uid://bbmrkmu5867hj" path="res://entities/look/look.gd" id="1_knyls"]
+[ext_resource type="Script" uid="uid://cw5hhuftql5fg" path="res://entities/look/look.gd" id="1_lg1ee"]
+[ext_resource type="Texture2D" uid="uid://0sqjekgcyw4w" path="res://Art/hallway3b/eyes-phases.png" id="2_evy2d"]
+[ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="3_2phk0"]
+[ext_resource type="AudioStream" uid="uid://dellqi1wfn10e" path="res://Audio/hallway3b/8-bit-horror-noises-63944.mp3" id="4_7awdh"]
+[ext_resource type="AudioStream" uid="uid://cgyv84ue7uwtl" path="res://Audio/hallway3b/terrifying-wind-333074.mp3" id="5_tig20"]
+[ext_resource type="AudioStream" uid="uid://dmn6i4s5yw2kq" path="res://Audio/hallway3b/whispers-30557.mp3" id="6_eurf3"]
+[ext_resource type="Texture2D" uid="uid://blr780ou3qqnk" path="res://VFX/eyes/Screenshot_20250803-185043.png" id="7_evy2d"]
+[ext_resource type="Texture2D" uid="uid://dov47q5vt0ai" path="res://VFX/eyes/Screenshot_20250803-185101.png" id="8_7mjbp"]
+[ext_resource type="Texture2D" uid="uid://bpqo4boc6gj8v" path="res://VFX/eyes/Screenshot_20250803-185057.png" id="9_j8rsy"]
+[ext_resource type="Texture2D" uid="uid://dnrqti2s3ifnq" path="res://VFX/eyes/Screenshot_20250803-185047.png" id="10_3pmhp"]
+[ext_resource type="Texture2D" uid="uid://c4pccnauwd67v" path="res://VFX/eyes/Screenshot_20250803-185053.png" id="11_atow5"]
+
+[sub_resource type="Animation" id="Animation_tig20"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Effects/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Effects/AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_evy2d"]
+resource_name = "jumpscare"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Effects/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 0.8, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 4, 2, 3, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Effects/AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("glitchy:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("jumpscare_sound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2phk0"]
+resource_name = "shake"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(-10, 0), Vector2(-14, -14), Vector2(23, 12), Vector2(-27, 15), Vector2(2, -18), Vector2(-48, -18), Vector2(-20, 5), Vector2(11, -32), Vector2(9, 27), Vector2(-32, -4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_saaor"]
+_data = {
+&"RESET": SubResource("Animation_tig20"),
+&"jumpscare": SubResource("Animation_evy2d"),
+&"shake": SubResource("Animation_2phk0")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tig20"]
+radius = 70.0
+height = 274.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eurf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_evy2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7mjbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j8rsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3pmhp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_atow5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="look" type="CharacterBody2D"]
-script = ExtResource("1_knyls")
+process_mode = 3
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_lg1ee")
+
+[node name="eye" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_evy2d")
+hframes = 3
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(2, 1)
+texture = ExtResource("3_2phk0")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_saaor")
+}
+autoplay = "shake"
+
+[node name="shakeAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_saaor")
+}
+
+[node name="glitchy" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_7awdh")
+volume_db = -20.0
+autoplay = true
+bus = &"SFX"
+
+[node name="spawn_sound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_tig20")
+volume_db = -20.0
+pitch_scale = 0.8
+autoplay = true
+bus = &"SFX"
+
+[node name="jumpscare_sound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_eurf3")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tig20")
+
+[node name="positionTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[node name="jumpscareTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+autostart = true
+
+[node name="Effects" type="CanvasLayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Effects"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(640, 360)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_eurf3")
+frame = 1
+
+[connection signal="timeout" from="positionTimer" to="." method="_on_position_timer_timeout"]
+[connection signal="timeout" from="jumpscareTimer" to="." method="_on_jumpscare_timer_timeout"]

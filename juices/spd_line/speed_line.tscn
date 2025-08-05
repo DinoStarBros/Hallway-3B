@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://2m2qt563w7ii"]
+
+[ext_resource type="Script" uid="uid://drmjn7fohcds7" path="res://juices/spd_line/speed_line.gd" id="1_gdkbw"]
+[ext_resource type="Texture2D" uid="uid://dg6gm0t0y2xbg" path="res://Art/planestuff/fx/speed_lines-Sheet.png" id="1_jkn5y"]
+
+[sub_resource type="Animation" id="Animation_6lynj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spd_line2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spd_line2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-100, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jkn5y"]
+resource_name = "loop"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spd_line2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spd_line2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(50, 0), Vector2(-50, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lynj"]
+_data = {
+&"RESET": SubResource("Animation_6lynj"),
+&"loop": SubResource("Animation_jkn5y")
+}
+
+[node name="speed_line" type="Node2D"]
+script = ExtResource("1_gdkbw")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_6lynj")
+}
+autoplay = "loop"
+speed_scale = 3.0
+
+[node name="spd_line2" type="Sprite2D" parent="."]
+position = Vector2(-100, 0)
+texture = ExtResource("1_jkn5y")
+hframes = 19
+frame = 6

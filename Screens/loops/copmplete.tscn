@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce7nrn5jc7dqm"]
+
+[ext_resource type="Texture2D" uid="uid://b8kckto3agdfh" path="res://Art/hallway3b/rabbend.png" id="1_hewgw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hewgw"]
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
+[node name="copmplete" type="Node"]
+
+[node name="Rabbend" type="Sprite2D" parent="."]
+position = Vector2(642, 356)
+texture = ExtResource("1_hewgw")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 85.0
+offset_top = 19.0
+offset_right = 193.0
+offset_bottom = 62.0
+scale = Vector2(7.21246, 6.8395)
+text = "You escaped 
+the loop!"
+label_settings = SubResource("LabelSettings_hewgw")

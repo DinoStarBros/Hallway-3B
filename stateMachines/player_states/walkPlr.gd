@@ -4,6 +4,8 @@ func on_enter()-> void:
 	pass
 
 func process(delta: float)-> void:
+	%run.stop()
+	%walk.pitch_scale = randf_range(0.7,0.9)
 	if p.x_input == 0:
 		p.anim.play("idle")
 	else:
@@ -14,7 +16,7 @@ func process(delta: float)-> void:
 	if Input.is_action_just_pressed("Jump") and p.is_on_floor():
 		p.sm.change_state("jump")
 	
-	if p.velocity.y >= 1:
+	if p.velocity.y >= 1 and not p.is_on_floor():
 		p.sm.change_state("fall")
 	
 	if Input.is_action_pressed("Run"):
@@ -24,7 +26,7 @@ func process(delta: float)-> void:
 		p.sm.change_state("crouch")
 
 func on_exit()-> void:
-	pass
+	%dustParticle.emitting = false
 
 func controlled_movement(_delta: float) -> void:
 	p.velocity.x = p.walk_speed * p.x_input

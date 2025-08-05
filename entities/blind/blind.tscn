@@ -1,6 +1,132 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctdfurkpk3nf3"]
+[gd_scene load_steps=10 format=3 uid="uid://ctdfurkpk3nf3"]
 
 [ext_resource type="Script" uid="uid://blybus453bgea" path="res://entities/blind/blind.gd" id="1_kop71"]
+[ext_resource type="Texture2D" uid="uid://cui84p7e3287a" path="res://Art/hallway3b/flash monster.png" id="2_rq0f6"]
+[ext_resource type="AudioStream" uid="uid://bjyk0ouhitv43" path="res://Audio/41randsfx/9.wav" id="3_p0sap"]
+[ext_resource type="AudioStream" uid="uid://bxsjyi03yan6l" path="res://Audio/whip_hit.wav" id="4_y782d"]
+[ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="5_rq0f6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phflm"]
+size = Vector2(54, 60)
+
+[sub_resource type="Animation" id="Animation_p0sap"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Effect/Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_phflm"]
+resource_name = "flash"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Effect/Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0.75), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bing:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bing2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0sap"]
+_data = {
+&"RESET": SubResource("Animation_p0sap"),
+&"flash": SubResource("Animation_phflm")
+}
 
 [node name="blind" type="CharacterBody2D"]
 script = ExtResource("1_kop71")
+
+[node name="Icon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(100, 100, 100, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_rq0f6")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="htiboxcol" type="CollisionShape2D" parent="hitbox"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_phflm")
+
+[node name="Effect" type="CanvasLayer" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Effect"]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-210, -163, -147, 1055, 1608, 921, 1429, -270)
+
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_p0sap")
+}
+
+[node name="bing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_p0sap")
+volume_db = -5.0
+pitch_scale = 0.7
+bus = &"SFX"
+
+[node name="bing2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_y782d")
+volume_db = -5.0
+pitch_scale = 0.7
+bus = &"SFX"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("5_rq0f6")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

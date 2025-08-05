@@ -8,10 +8,15 @@
 
 config_version=5
 
+[animation]
+
+warnings/check_invalid_track_paths=false
+warnings/check_angle_interpolation_type_conflicting=false
+
 [application]
 
 config/name="Hallway3B"
-run/main_scene="uid://uemdjeta0jrg"
+run/main_scene="uid://wjcfuf7h1eud"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,13 +24,14 @@ config/icon="res://icon.svg"
 
 Global="*res://global.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+SaveLoad="*res://saveSystem/SaveLoad.gd"
+GlobalSignals="*res://GlobalSignals.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
@@ -40,9 +46,15 @@ folder_colors={
 "res://Screens/": "green",
 "res://addons/": "gray",
 "res://entities/": "blue",
+"res://juices/": "red",
+"res://level_stuff/": "orange",
 "res://saveSystem/": "yellow",
 "res://timer/": "teal"
 }
+
+[gui]
+
+theme/custom_font="uid://vjmr11ib3k4m"
 
 [input]
 
@@ -76,15 +88,35 @@ Run={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+M1={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+Esc={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+M2={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
 
 [layer_names]
 
+2d_render/layer_1="lights"
+2d_render/layer_2="flashlight"
 2d_physics/layer_1="walls & floor"
 2d_physics/layer_2="plr hitbox - enemy hurtbox"
 2d_physics/layer_3="enemy hitbox - plr hurtbox"
+2d_physics/layer_4="flashlight"
+2d_physics/layer_5="door"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

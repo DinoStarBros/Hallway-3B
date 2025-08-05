@@ -1,0 +1,199 @@
+[gd_scene load_steps=12 format=3 uid="uid://0j70n00vi13v"]
+
+[ext_resource type="Script" uid="uid://c5emdvvfpak05" path="res://level_stuff/jammed_door/jammed_door.gd" id="1_xfvee"]
+[ext_resource type="Texture2D" uid="uid://cmtgtcfimdg4c" path="res://Art/Placeholder/Door.png" id="2_ehkw2"]
+[ext_resource type="AudioStream" uid="uid://cep33sucdvyha" path="res://Audio/hallway3b/wood-break-40011.wav" id="3_w5656"]
+[ext_resource type="AudioStream" uid="uid://e7fgtf2ti3ki" path="res://Audio/41randsfx/15.wav" id="4_n3s2x"]
+[ext_resource type="Texture2D" uid="uid://c0jpnw00110i" path="res://Art/hitspark.png" id="5_76x5g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jsgo6"]
+size = Vector2(64, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypn3g"]
+size = Vector2(160, 96)
+
+[sub_resource type="Animation" id="Animation_ypn3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("trigger_area/door_area:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Door:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitspark:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_4sqri"]
+resource_name = "highlight"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(2.2, 2.2)]
+}
+
+[sub_resource type="Animation" id="Animation_jsgo6"]
+resource_name = "open"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("trigger_area/door_area:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitspark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ypn3g"]
+_data = {
+&"RESET": SubResource("Animation_ypn3g"),
+&"highlight": SubResource("Animation_4sqri"),
+&"open": SubResource("Animation_jsgo6")
+}
+
+[node name="JammedDoor" type="StaticBody2D"]
+script = ExtResource("1_xfvee")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jsgo6")
+
+[node name="trigger_area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="door_area" type="CollisionShape2D" parent="trigger_area"]
+shape = SubResource("RectangleShape2D_ypn3g")
+
+[node name="Door" type="Sprite2D" parent="."]
+modulate = Color(0.341176, 1, 0.341176, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ehkw2")
+flip_h = true
+
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ypn3g")
+}
+
+[node name="lifeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="knockDownDoor" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("3_w5656")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="knockDownDoor2" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("4_n3s2x")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="Hitspark" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(2, 2)
+texture = ExtResource("5_76x5g")
+centered = false
+offset = Vector2(-128, -64)
+flip_h = true
+hframes = 2
+vframes = 2
+frame = 3
+
+[connection signal="body_entered" from="trigger_area" to="." method="_on_trigger_area_body_entered"]
+[connection signal="body_exited" from="trigger_area" to="." method="_on_trigger_area_body_exited"]
+[connection signal="timeout" from="lifeTimer" to="." method="_on_life_timer_timeout"]

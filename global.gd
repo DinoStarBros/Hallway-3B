@@ -1,12 +1,12 @@
 extends Node
 
-var game : Game 
-var enemy_container : Node2D
+var entity_container : Node2D
 var cam : PlrCamera
 var camRect : ColorRect
 var screen_corners : Rect2
 var player : Player
 var enemy_arrows : Node
+var power_outage : bool = false
 
 var attack : Attack = Attack.new()
 
@@ -17,17 +17,22 @@ var xp : int = 0
 var next_lvl_xp : int = 20
 var level : int = 1
 
+enum game_states {
+	Gameplay, Lost
+}
+var game_state : game_states = game_states.Gameplay
+
 func _init() -> void:
 	volume_handle()
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-var master_volume : float
-var music_volume : float
-var sfx_volume : float
-var screen_shake_value : bool 
-var frame_freeze_value : bool
+var master_volume : float = 0.75
+var music_volume : float = 0.75
+var sfx_volume : float = 0.75
+var screen_shake_value : bool = true
+var frame_freeze_value : bool = true
 var resolution_index : int
 
 func _process(_delta:float)->void:
@@ -54,3 +59,16 @@ func volume_handle() -> void:
 	)
 
 var gravity : float = 1500
+
+func game_over() -> void:
+	get_tree().change_scene_to_file("res://Screens/GameOver/game_over.tscn")
+
+func scene_change(scene : String) -> void:
+	SceneManager.change_scene(
+		scene, {
+			
+			"pattern_enter" : "fade",
+			"pattern_leave" : "fade",
+			
+			}
+		)

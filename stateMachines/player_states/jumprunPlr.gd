@@ -3,6 +3,8 @@ extends StatePlr
 func on_enter()-> void:
 	p.anim.play("jumprun")
 	p.velocity.y = -p.jump_velocity
+	%run.pitch_scale = randf_range(1.9,2.1)
+	%run.play()
 
 func process(delta: float)-> void:
 	weighty_movement(delta)
@@ -25,7 +27,7 @@ func process(delta: float)-> void:
 	ceiling_shift_handle()
 
 func on_exit()-> void:
-	pass
+	%run.stop()
 
 func weighty_movement(delta: float) -> void:
 	p.x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
